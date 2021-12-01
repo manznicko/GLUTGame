@@ -1,8 +1,8 @@
-EX=ex1 ex2 ex3 ex4 
+EX=ex1 ex2 ex3 ex4 ex5
 all: $(EX)
 
 #  Unix/Linux
-%: %.c;gcc -Wall -O3 -o $@ $< -lglut -lGLU -lGL
+%: %.c;gcc -Wall -O3 -o $@ $< -lglut -lGLU -lGL -lm
 
 #  OSX
 #%: %.c;gcc -Wall -O3 -o $@ $< -framework GLUT -framework OpenGL
