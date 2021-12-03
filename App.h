@@ -2,7 +2,7 @@
 #define App_h
 
 #include "GlutApp.h"
-// #include "Game.h"
+#include "Game.h"
 
 
 class App: public GlutApp {
