@@ -12,14 +12,14 @@ public:
     
     App(int argc, char** argv, int width, int height, const char* title);
     
-    void idle();
+    // void idle();
     
     void draw() const;
     
     void keyDown(unsigned char key, float x, float y);
-    void specialKeyDown(int key, float x, float y);
-    void keyUp(unsigned char key, float x, float y);
-    void specialKeyUp(int key, float x, float y);
+    // void specialKeyDown(int key, float x, float y);
+    // void keyUp(unsigned char key, float x, float y);
+    // void specialKeyUp(int key, float x, float y);
         
     ~App();
 };
