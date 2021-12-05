@@ -12,9 +12,9 @@ void App::draw() const {
     game->draw();
 }
 
-// void App::idle(){
-//     game->idle();
-// }
+void App::idle(){
+    game->idle();
+}
 
 void App::keyDown(unsigned char key, float x, float y){
     if (key == 27){
@@ -27,9 +27,9 @@ void App::keyDown(unsigned char key, float x, float y){
 //     game->specialKeyDown(key, x, y);
 // }
 
-// void App::keyUp(unsigned char key, float x, float y){
-//     game->keyUp(key, x, y);
-// }
+void App::keyUp(unsigned char key, float x, float y){
+    game->keyUp(key, x, y);
+}
 
 // void App::specialKeyUp(int key, float x, float y){
 //     game->specialKeyUp(key, x, y);

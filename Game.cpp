@@ -13,6 +13,8 @@ using namespace std;
 
 Game::Game(bool begin){
     setBackDisp("images/bg.jpg");
+    // plyr = new Player("images/chugga.jpg", -0.125, -0.81, 0.05, 0.25);
+    plyr = new Player("images/player2.png");
 }
 
 void Game::setBackDisp(const char* bgPic) {
@@ -59,13 +61,23 @@ void Game::displayBackground() {
     
     glDisable(GL_TEXTURE_2D);
 }
+void Game::idle(){
+    plyr->idle();
+}
 
 void Game::draw(){
     displayBackground();
+    plyr->draw();
 }
 
 void Game::keyDown(unsigned char key, float x, float y){
-
+    plyr->keyDown(key,x,y);
+    cout<<"key down"<<endl;
 
 }
+void Game::keyUp(unsigned char key, float x, float y){
+    plyr->keyUp(key,x,y);
+    cout<<"key up"<<endl;
+}
+
 Game::~Game(){}

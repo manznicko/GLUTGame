@@ -162,6 +162,7 @@ void GlutApp::glutDisplayCB(){
     
     // Draw stuff here
     singleton->draw();
+    glutPostRedisplay();
     
     // We have been drawing everything to the back buffer
     // Swap the buffers to see the result of what we drew
