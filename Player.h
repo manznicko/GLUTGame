@@ -48,16 +48,15 @@
 #ifndef Player_h
 #define Player_h
 #include "SOIL.h"
+
 #if defined WIN32
 #include <freeglut.h>
-#include "SOIL.h"
 #elif defined __APPLE__
 #include <GLUT/glut.h>
-#include "SOIL.h"
 #else
 #include <GL/freeglut.h>
-#include "SOIL.h"
 #endif
+
 #include "Rect.h"
 
 class Player: public Rect{

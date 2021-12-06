@@ -1,9 +1,12 @@
 #ifndef GAME_H
 #define GAME_H
 // INLCUDE ALL GAME QUALITIES HERE
-// #include <deque>
+#include <deque>
 // #include <time.h>
+
+#include<vector>
 #include "Player.h"
+#include "Enemies.h"
 
 #if defined WIN32
 #include <freeglut.h>
@@ -17,6 +20,7 @@ class Game{
 
 public:
     Player* plyr;
+    std::deque<Enemies*> enemies;
     GLuint background_id;
     Game();
     Game(bool);

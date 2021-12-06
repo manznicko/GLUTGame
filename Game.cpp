@@ -14,7 +14,13 @@ using namespace std;
 Game::Game(bool begin){
     setBackDisp("images/bg.jpg");
     // plyr = new Player("images/chugga.jpg", -0.125, -0.81, 0.05, 0.25);
-    plyr = new Player("images/player2.png");
+    plyr = new Player("images/player2.jpg");
+    // enemies.push_back(new Enemies(" ", -0.6, 0.75));
+    for(int i = 0; i < 1; i++){ //Row of enemies
+        for(int j = 0;j<2;j++){
+
+        }
+    }
 }
 
 void Game::setBackDisp(const char* bgPic) {
@@ -68,6 +74,9 @@ void Game::idle(){
 void Game::draw(){
     displayBackground();
     plyr->draw();
+    for(auto it = enemies.begin(); it != enemies.end(); it++){
+        (*it)->draw();
+    }
 }
 
 void Game::keyDown(unsigned char key, float x, float y){
