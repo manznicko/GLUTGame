@@ -19,10 +19,14 @@ Game::Game(bool begin){
     for(int i = 1; i < 3; i++){ //Row of enemies
         for(int j = 0;j<4;j++){
             // enemies.push_back(new Enemies(" ", j*-0.35+0.4, (1-(i*0.2))));
-            if(i%2 == 1)
+            if(i%2 == 1){
                 enemies.push_back(new Enemies(" ", j*-0.35+0.4, (1-(i*0.2))));
-            else    
-                enemies.push_back(new Enemies(" ", j*-0.35+0.4, (1-(i*0.33))));
+            }
+            else  {  
+                enemies.push_back(new Enemies(" ", j*-0.35+0.22, (1-(i*0.33))));
+                if(j == 3)
+                   enemies.push_back(new Enemies(" ", (j-4)*-0.60, (1-(i*0.33)))); 
+            }
         }
     }
 }
@@ -73,6 +77,11 @@ void Game::displayBackground() {
 }
 void Game::idle(){
     plyr->idle();
+
+    for(auto it = enemies.begin(); it!=enemies.end(); it++){
+        (*it)->advance();
+        (*it)->idle();
+    }
 }
 
 void Game::draw(){

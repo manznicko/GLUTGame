@@ -12,6 +12,7 @@
 #include "Rect.h"
 
 class Enemies: public Rect{
+    float dx, dy, speed;
     GLuint enemy_id; 
     public:
         Enemies();
@@ -19,6 +20,7 @@ class Enemies: public Rect{
 
         void idle();
         void draw();
+        void advance();
 
 };
 

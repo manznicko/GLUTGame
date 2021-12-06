@@ -9,7 +9,7 @@
 #include <GL/freeglut.h>
 #endif
 
-Enemies::Enemies(const char* epic, float a, float b) : Rect::Rect(a,b, .2,.2,1,1,1){ // -0.6, 0.75
+Enemies::Enemies(const char* epic, float a, float b) : Rect::Rect(a,b, .15,.15,1,1,1), speed(-0.00029){ // -0.6, 0.75
     glClearColor (0.0, 0.0, 0.0, 0.0);
     glShadeModel(GL_FLAT);
     glEnable(GL_DEPTH_TEST);
@@ -45,6 +45,9 @@ void Enemies::draw(){
 }
 
 void Enemies::idle(){
+    x += dx;
+    y += dy;
+
     if(x < -1){
         x = -1;
     }
@@ -57,4 +60,8 @@ void Enemies::idle(){
     if(y - h < -1){
         y = -1 + h;
     }
+}
+
+void Enemies::advance(){
+    dy = speed;
 }

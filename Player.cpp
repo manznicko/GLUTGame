@@ -38,24 +38,7 @@ void Player::draw(){
     
     glBindTexture( GL_TEXTURE_2D, player_id );
     glEnable(GL_TEXTURE_2D);
-    
-    // glBegin(GL_QUADS);
-    // glColor4f(1, 1, 1, 1);
-    // glTexCoord2f(0, 0);
-    // glVertex2f(x, y - h);
-    
-    // glTexCoord2f(0, 1);
-    // glVertex2f(x, y);
-    
-    // glTexCoord2f(1, 1);
-    // glVertex2f(x + w, y);
-    
-    // glTexCoord2f(1, 0);
-    // glVertex2f(x + w, y - h);
-    
-    // glEnd();
-    
-    // glDisable(GL_TEXTURE_2D);
+
 
     glColor3f(red, green, blue);
 	
@@ -69,7 +52,7 @@ void Player::draw(){
 	glEnd();
     glDisable(GL_TEXTURE_2D);
 }
-Player::Player(const char* ppic) : Rect::Rect(-.125,-.6, .20,.20,0.6,0.1,1), dx(0), dy(0), speed(.004){
+Player::Player(const char* ppic) : Rect::Rect(-.125,-.6, .17,.17,0.6,0.1,1), dx(0), dy(0), speed(.004){
     glClearColor (0.0, 0.0, 0.0, 0.0);
     glShadeModel(GL_FLAT);
     glEnable(GL_DEPTH_TEST);
@@ -143,28 +126,3 @@ float Player::getSpeed() const{
     return speed;
 }
 
-// void Player::setX(int x) {
-// 	this->x = x;
-// }
-// void Player::setY(int y) {
-// 	this->y = y;
-// }
-// void Player::setH(int h) {
-// 	this->h = h;
-// }
-// void Player::setW(int w) {
-// 	this->w = w;
-// }
-
-// float Player::getX() const {
-// 	return x;
-// }
-// float Player::getY() const {
-// 	return y;
-// }
-// float Player::getH() const {
-// 	return h;
-// }
-// float Player::getW() const {
-// 	return w;
-// }
