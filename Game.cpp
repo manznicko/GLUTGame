@@ -16,9 +16,13 @@ Game::Game(bool begin){
     // plyr = new Player("images/chugga.jpg", -0.125, -0.81, 0.05, 0.25);
     plyr = new Player("images/player2.jpg");
     // enemies.push_back(new Enemies(" ", -0.6, 0.75));
-    for(int i = 0; i < 1; i++){ //Row of enemies
-        for(int j = 0;j<2;j++){
-
+    for(int i = 1; i < 3; i++){ //Row of enemies
+        for(int j = 0;j<4;j++){
+            // enemies.push_back(new Enemies(" ", j*-0.35+0.4, (1-(i*0.2))));
+            if(i%2 == 1)
+                enemies.push_back(new Enemies(" ", j*-0.35+0.4, (1-(i*0.2))));
+            else    
+                enemies.push_back(new Enemies(" ", j*-0.35+0.4, (1-(i*0.33))));
         }
     }
 }
