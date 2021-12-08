@@ -5,6 +5,7 @@
 #include<fstream>
 #include<math.h>
 #include<deque>
+#include<vector>
 #include<ctime>
 #include<stdlib.h>
 
@@ -12,10 +13,11 @@
 using namespace std;
 
 Game::Game(bool begin){
-    setBackDisp("images/bg.jpg");
+    setBackground("images/bg.jpg");
     // plyr = new Player("images/chugga.jpg", -0.125, -0.81, 0.05, 0.25);
     plyr = new Player("images/player2.jpg");
     // enemies.push_back(new Enemies(" ", -0.6, 0.75));
+    bulletSp = 0.0035; 
     for(int i = 1; i < 3; i++){ //Row of enemies
         for(int j = 0;j<4;j++){
             // enemies.push_back(new Enemies(" ", j*-0.35+0.4, (1-(i*0.2))));
@@ -31,7 +33,7 @@ Game::Game(bool begin){
     }
 }
 
-void Game::setBackDisp(const char* bgPic) {
+void Game::setBackground(const char* bgPic) {
 	//Sets background image
     glClearColor (0.0, 0.0, 0.0, 0.0);
     glShadeModel(GL_FLAT);
@@ -77,16 +79,45 @@ void Game::displayBackground() {
 }
 void Game::idle(){
     plyr->idle();
-
+    // for(auto it = bullets.begin(); it!=bullets.end(); it++){
+    //     
+    // }
+    int i=0, j=0;
     for(auto it = enemies.begin(); it!=enemies.end(); it++){
         (*it)->advance();
         (*it)->idle();
     }
+    for(Rect* r : bullets){
+        //move bullet up
+        r->setY(r->getY() + bulletSp);
+    }
+    for(Enemies* e: enemies){
+        if(checkCollision(*e, *plyr)){
+            exit(0);
+        }
+        for(Rect* b: bullets){
+            if(checkCollision(*b,*e)){
+                cout<<"collision check"<<endl;
+                enemies.erase(enemies.begin()+i);
+                bullets.erase(bullets.begin()+j); 
+            }
+            j++;
+        }
+        i++;
+    }
+    
+    if(enemies.size() < 1){
+        exit(0);
+    }
+    
 }
 
 void Game::draw(){
     displayBackground();
     plyr->draw();
+    for(auto it = bullets.begin(); it!=bullets.end(); it++){
+        (*it)->draw(); 
+    }
     for(auto it = enemies.begin(); it != enemies.end(); it++){
         (*it)->draw();
     }
@@ -95,6 +126,9 @@ void Game::draw(){
 void Game::keyDown(unsigned char key, float x, float y){
     plyr->keyDown(key,x,y);
     cout<<"key down"<<endl;
+    if (key == 32){
+        fire();
+    }
 
 }
 void Game::keyUp(unsigned char key, float x, float y){
@@ -102,4 +136,16 @@ void Game::keyUp(unsigned char key, float x, float y){
     cout<<"key up"<<endl;
 }
 
-Game::~Game(){}
+void Game::fire(){
+    bullets.push_back(new Rect(plyr->getX() + plyr->getW()/2 - .03, plyr->getY(), .05,.1,0.5,0.5,0.5));
+}
+
+bool Game::checkCollision(const Rect& one, const Rect& two) const{ // returns bool if player/enemy or bullet/enemy collide
+    return  (one.getX() < (two.getX() + two.getW()) && two.getX() < (one.getX() + one.getW())) && (one.getY() > (two.getY() - two.getH()) && two.getY() > (one.getY() - one.getH()));
+}
+
+
+Game::~Game(){
+    delete plyr;
+
+}

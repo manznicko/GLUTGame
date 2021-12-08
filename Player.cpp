@@ -10,30 +10,6 @@
 #endif
 using namespace std;
 
-// Player::Player(const char* playPic, float x=-0.125, float y=-0.81, float h=0.05, float w=0.25){
-//     glClearColor (0.0, 0.0, 0.0, 0.0);
-//     glShadeModel(GL_FLAT);
-//     glEnable(GL_DEPTH_TEST);
-    
-//     player_id = SOIL_load_OGL_texture (
-//     	playPic,
-//     	SOIL_LOAD_AUTO,
-//     	SOIL_CREATE_NEW_ID,
-//      	SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
-//     );
-    
-//     glEnable(GL_BLEND);
-//     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    
-//     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-    
-//     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-
-// 	this->x = x;
-// 	this->y = y;
-// 	this->h = h;
-// 	this->w = w;
-// }
 void Player::draw(){
     
     glBindTexture( GL_TEXTURE_2D, player_id );
@@ -70,11 +46,10 @@ Player::Player(const char* ppic) : Rect::Rect(-.125,-.6, .17,.17,0.6,0.1,1), dx(
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 }
 
-void Player::idle(){
+void Player::idle(){ // Prevents out of bounds on screen
     x += dx;
     y += dy;
 
-    //stops ship from leaving screen
     if(x < -1){
         x = -1;
     }
@@ -88,7 +63,7 @@ void Player::idle(){
         y = -1 + h;
     }
 }
-void Player::keyDown(unsigned char key, float x, float y) {
+void Player::keyDown(unsigned char key, float x, float y) { // Gets player to move
     if(key == 'w'){
         dy += speed;
         cout<< dy << endl;
@@ -104,7 +79,7 @@ void Player::keyDown(unsigned char key, float x, float y) {
     }
 }
 
-void Player::keyUp(unsigned char key, float x, float y) {
+void Player::keyUp(unsigned char key, float x, float y) { // Gets player to stop if key is released
     if(key == 'w'){
         dy += -speed;
     }
@@ -122,7 +97,7 @@ void Player::keyUp(unsigned char key, float x, float y) {
     }
 }
 
-float Player::getSpeed() const{
+float Player::getSpeed() const{ // getter for speed
     return speed;
 }
 
